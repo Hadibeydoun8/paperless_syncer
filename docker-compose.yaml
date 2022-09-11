@@ -3,5 +3,5 @@ services:
   web:
     build: .
     volumes:
-      - ./onedrive:/onedrive
+      - /mnt/bdrive/OneDrive:/OneDrive
       - ./config:/config
