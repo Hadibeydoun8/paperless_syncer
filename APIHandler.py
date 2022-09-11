@@ -22,7 +22,6 @@ class APIHandler:
         self._create_table()
 
     def update(self):
-
         for tag_id in self.needed_tag_ids:
             self._get_files_to_download_for_tag_id(tag_id)
             self._remove_already_downloaded_ids()
@@ -107,4 +106,5 @@ class APIHandler:
             file_dir = f"{download_dir}\\{self._get_file_name(_id)}".encode('ascii', 'ignore').decode('ascii')
             with open(file_dir, 'wb') as outfile:
                 outfile.write(response.content)
+            print(f"Downloaded file: {file_dir}")
             self._insert_id_to_database(_id)
