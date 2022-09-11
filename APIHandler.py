@@ -63,11 +63,12 @@ class APIHandler:
     def _create_table(self):
         try:
             c = self.conn.cursor()
-            c.execute("""
+            result = c.execute("""
             CREATE TABLE IF NOT EXISTS downloaded_files (
                 id integer NOT NULL
             )
             """)
+            print(result)
         except Error as e:
             print(e)
 
