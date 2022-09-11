@@ -2,6 +2,8 @@ version: '3'
 services:
   web:
     build: .
+    environment:
+      - PYTHONUNBUFFERED=1
     volumes:
       - /mnt/bdrive/OneDrive:/OneDrive
       - ./config:/config
