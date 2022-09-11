@@ -8,6 +8,7 @@ config_path = '/config'
 f = APIHandler.APIHandler(token, api_url, config_path)
 print("APIHandler created")
 
-print("Updating")
-f.update()
-time.sleep(2)
+while True:
+    print("Updating")
+    f.update()
+    time.sleep(2)
