@@ -104,7 +104,7 @@ class APIHandler:
         for _id in self.files_to_download:
             response = requests.get(f'{self.api_url}/documents/{_id}/download/', headers=self.auth_header,
                                     allow_redirects=True)
-            file_dir = f"{download_dir}//{self._get_file_name(_id)}".encode('ascii', 'ignore').decode('ascii')
+            file_dir = f"{download_dir}\\{self._get_file_name(_id)}".encode('ascii', 'ignore').decode('ascii')
             with open(file_dir, 'wb') as outfile:
                 outfile.write(response.content)
             self._insert_id_to_database(_id)

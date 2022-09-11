@@ -1,7 +1,7 @@
 {
   "downloadable_tags": {
-    "math": ".//OneDrive//Documents//School//AP Calc",
-    "ap-research": ".//OneDrive//Documents//School//AP Research",
-    "drivers-ed": ".//OneDrive//Documents//Drivers"
+    "math": ".\\OneDrive\\Documents\\School\\AP Calc",
+    "ap-research": ".\\OneDrive\\Documents\\School\\AP Research",
+    "drivers-ed": ".\\OneDrive\\Documents\\Drivers"
   }
 }
