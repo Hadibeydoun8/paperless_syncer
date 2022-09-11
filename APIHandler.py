@@ -7,6 +7,7 @@ from sqlite3 import Error
 class APIHandler:
     def __init__(self, token, api_url, config_path):
         self.needed_tag_ids = []
+        self.update_config_counter = 0
         self.conn = None
         self.token = token
         self.api_url = api_url
@@ -15,14 +16,16 @@ class APIHandler:
         self.needed_tags = []
         self.files_to_download = []
         self.db_file = f'{config_path}/written_files.db'
-        with open('/config/config.json', 'r') as j:
-            self.tags_to_path = json.load(j)['downloadable_tags']
-            self._convert_name_to_id(self.tags_to_path)
+        self._update_config()
         self._create_connection()
         self._create_table()
 
     def update(self):
         for tag_id in self.needed_tag_ids:
+            self.update_config_counter += 1
+            if self.update_config_counter == 100:
+                self._update_config()
+                self.update_config_counter = 0
             self._get_files_to_download_for_tag_id(tag_id)
             self._remove_already_downloaded_ids()
             self._download_files(tag_id)
@@ -109,3 +112,8 @@ class APIHandler:
                 outfile.write(response.content)
             print(f"Downloaded file: {file_dir}")
             self._insert_id_to_database(_id)
+
+    def _update_config(self):
+        with open('/config/config.json', 'r') as j:
+            self.tags_to_path = json.load(j)['downloadable_tags']
+            self._convert_name_to_id(self.tags_to_path)

@@ -9,6 +9,5 @@ f = APIHandler.APIHandler(token, api_url, config_path)
 print("APIHandler created")
 
 while True:
-    print("Updating")
     f.update()
     time.sleep(2)
