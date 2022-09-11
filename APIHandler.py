@@ -15,7 +15,7 @@ class APIHandler:
         self.needed_tags = []
         self.files_to_download = []
         self.db_file = f'{config_path}/written_files.db'
-        with open('config.json', 'r') as j:
+        with open('/config/config.json', 'r') as j:
             self.tags_to_path = json.load(j)['downloadable_tags']
             self._convert_name_to_id(self.tags_to_path)
         self._create_connection()
