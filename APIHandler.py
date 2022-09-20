@@ -8,7 +8,6 @@ import requests
 
 class APIHandler:
     def __init__(self, token, api_url, config_path):
-        self._wait_for_server_to_be_ready()
         self.needed_tag_ids = []
         self.update_config_counter = 0
         self.conn = None
@@ -19,6 +18,7 @@ class APIHandler:
         self.needed_tags = []
         self.files_to_download = []
         self.db_file = f'{config_path}/written_files.db'
+        self._wait_for_server_to_be_ready()
         self._update_config()
         self._create_connection()
         self._create_table()
