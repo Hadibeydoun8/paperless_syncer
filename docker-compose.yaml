@@ -7,3 +7,20 @@ services:
     volumes:
       - /mnt/bdrive/OneDrive:/OneDrive
       - ./config:/config
+    depends_on:
+      - "paperless-ngx"
+
+  paperless-ngx:
+    image: lscr.io/linuxserver/paperless-ngx:latest
+    container_name: paperless-ngx
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+      - REDIS_URL= #optional
+    volumes:
+      - /mnt/bdrive/OneDrive/Documents/paperless/Config:/config
+      - /mnt/bdrive/OneDrive/Documents/paperless/Data:/data
+    ports:
+      - 2550:8000
+    restart: unless-stopped
