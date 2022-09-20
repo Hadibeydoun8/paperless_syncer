@@ -53,7 +53,6 @@ class APIHandler:
                 if _key == key:
                     temp_id_to_path[con_dict[key]] = self.tags_to_path[key]
         self.needed_tag_ids = ids
-        print(self.needed_tag_ids)
         self.tag_id_to_path = temp_id_to_path
 
     def _create_connection(self):
