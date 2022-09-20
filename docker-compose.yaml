@@ -1,6 +1,6 @@
 version: '3'
 services:
-  web:
+  paperless-syncer:
     build: .
     environment:
       - PYTHONUNBUFFERED=1
