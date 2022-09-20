@@ -1,11 +1,14 @@
-import requests
 import json
 import sqlite3
+import time
 from sqlite3 import Error
+
+import requests
 
 
 class APIHandler:
     def __init__(self, token, api_url, config_path):
+        self._wait_for_server_to_be_ready()
         self.needed_tag_ids = []
         self.update_config_counter = 0
         self.conn = None
@@ -29,6 +32,16 @@ class APIHandler:
             self._get_files_to_download_for_tag_id(tag_id)
             self._remove_already_downloaded_ids()
             self._download_files(tag_id)
+
+    def _wait_for_server_to_be_ready(self):
+        while True:
+            try:
+                response = requests.get(f'{self.api_url}/documents/]', headers=self.auth_header)
+                if response.status_code == 200:
+                    break
+            except requests.exceptions.ConnectionError:
+                print("Server not ready yet, waiting 5 seconds")
+                time.sleep(5)
 
     def _get_files_to_download_for_tag_id(self, tag_id):
         response = requests.get(f'{self.api_url}/documents/?tags__id={tag_id}', headers=self.auth_header)
