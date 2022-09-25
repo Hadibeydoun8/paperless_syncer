@@ -10,16 +10,19 @@ f = APIHandler.APIHandler(token, api_url, config_path)
 print("APIHandler created")
 
 error_counter = 0
+sleep_time = 2
 
 while True:
     try:
         f.update()
         error_counter = 0
-        time.sleep(2)
+        sleep_time = 2
+        time.sleep(sleep_time)
     except ConnectionResetError:
         if error_counter == 5:
             print("Connection Reset Error 5 times in a row, exiting")
             exit(1)
         print("ConnectionResetError")
         error_counter += 1
+        sleep_time += 1
         time.sleep(5)
