@@ -22,5 +22,5 @@ services:
       - /mnt/bdrive/OneDrive/Documents/paperless/Config:/config
       - /mnt/bdrive/OneDrive/Documents/paperless/Data:/data
     ports:
-      - 2550:8000
+      - "2550:8000"
     restart: unless-stopped
