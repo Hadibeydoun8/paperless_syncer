@@ -18,11 +18,11 @@ while True:
         error_counter = 0
         sleep_time = 2
         time.sleep(sleep_time)
-    except ConnectionResetError:
+    except (ConnectionResetError, OSError, ConnectionError) as e:
         if error_counter == 5:
-            print("Connection Reset Error 5 times in a row, exiting")
+            print(f"{e} 5 times in a row, exiting")
             exit(1)
-        print("ConnectionResetError")
+        print(f"{e} occurred, waiting {sleep_time} seconds")
         error_counter += 1
         sleep_time += 1
         time.sleep(5)
